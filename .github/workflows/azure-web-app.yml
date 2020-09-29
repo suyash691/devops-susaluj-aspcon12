@@ -66,13 +66,6 @@ jobs:
            echo "::set-output name=acr_username::`az acr credential show -n ${{ env.REGISTRYNAME }} --query username | xargs`"
            echo "::set-output name=acr_password::`az acr credential show -n ${{ env.REGISTRYNAME }} --query passwords[0].value | xargs`"
            echo "::add-mask::`az acr credential show -n ${{ env.REGISTRYNAME }} --query passwords[0].value | xargs`"
-    - uses: azure/k8s-create-secret@v1
-    - name: ACR authentication
-      uses: azure/docker-login@v1
-      with:
-        login-server: ${{ env.REGISTRYNAME }}.azurecr.io
-        username: ${{ steps.createACR.outputs.acr_username }}
-        password: ${{ steps.createACR.outputs.acr_password }}   
     - name: 'Deploy to Azure Web App for Container'
       uses: azure/webapps-deploy@v2
       with: 
