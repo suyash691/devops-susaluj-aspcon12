@@ -79,6 +79,18 @@
             ]
         },
         {
+            "type": "Microsoft.ContainerRegistry/registries",
+            "sku": {
+                "name": "[parameters('registrySku')]"
+            },
+            "name": "[parameters('registryName')]",
+            "apiVersion": "2017-10-01",
+            "location": "[parameters('registryLocation')]",
+            "properties": {
+                "adminUserEnabled": "true"
+            }
+        },
+        {
             "type": "Microsoft.Web/serverfarms",
             "sku": {
                 "Tier": "[first(skip(split(parameters('sku'), ' '), 1))]",
